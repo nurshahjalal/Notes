@@ -1,0 +1,121 @@
+45
+
+instance ID
+i-0f0ef82ba9fa0e432
+
+public ip address
+34.227.93.32
+
+user
+Lee86
+
+once open as puuty to  aws, run the following command:
+EC2 Server Commands to install Jenkins:
+
+//Update all software packages on ec2 server
+sudo yum update
+
+//Add Jenkins repo
+sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenk...
+
+//Import a key file from Jenkins-CI to enable installation from the package
+sudo rpm --import https://pkg.jenkins.io/redhat/jenkins...
+
+//Install Jenkins
+sudo yum install jenkins -y
+
+//Update Java
+sudo yum install java-1.8.0-openjdk-devel
+sudo yum install java-1.8.0
+
+//Switch to Java
+sudo alternatives --config java
+
+//Start Jenkins as a service
+sudo service jenkins start
+
+//Get Admin Password
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+12abe4ba0a28495e8035b3020a4e9d2d
+
+
+Setup Jenkins on AWS EC2 Server. 
+Watch this video for detailed steps: https://youtu.be/4tinNCacomU
+
+AWS EC2 Linux Commands:
+
+Choose correct version of Java: 
+update-alternatives --config java
+
+Find Java Path:
+readlink -f /usr/bin/java
+
+Edit .bashrc file:
+vim .bashrc
+
+Enter the following in .bashrc and save the file 
+export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-11.0.7.10-4.amzn2.0.1.x86_64"
+PATH=$JAVA_HOME/bin:$PATH
+ 
+Apply the changes:
+source .bashrc
+ 
+Check if environment variables are set:
+ $ echo $JAVA_HOME
+ $ echo $PATH
+
+Install Git:
+sudo yum install git -y
+
+Find Git Path:
+git --exec-path
+
+Add a repository with a Maven package:
+
+sudo wget https://repos.fedorapeople.org/repos/... -O /etc/yum.repos.d/epel-apache-maven.repo
+
+Enter the following to set the version number for the packages:
+sudo sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
+
+Install Maven:
+sudo yum install -y apache-maven
+
+Find Maven Path:
+mvn -version
+
+Install Chrome Driver:
+sudo wget https://chromedriver.storage.googleapis.com/87.0.4280.88/chromedriver_linux64.zip
+sudo 
+sudo mv chromedriver /usr/bin/chromedriver
+chromedriver –version
+
+Install Chrome Binary:
+sudo curl https://intoli.com/install-google-chrome.sh| bash
+sudo mv /usr/bin/google-chrome-stable /usr/bin/google-chrome
+google-chrome –version
+
+install updated python version 
+sudo yum install -y python3.7
+
+point to newer version of python
+sudo alternatives --set python /usr/bin/python3.7
+
+check python verson 
+if python version is not changed try this 
+alias python = python3.7
+
+install sudo yum install pip
+
+try installing pytest:
+pip install --user pytest
+sudo env "PATH=$PATH" pip install pytest
+
+
+list all software
+dpkg --list
+
+Uninstall google chrome in ubuntu
+sudo apt-get --purge remove google-chrome-stable
+
+
