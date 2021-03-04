@@ -1,0 +1,8 @@
+Problems:
+
+pytest module not found in ubuntu when running from jenkins
+
+>> if pytest is installed and test can be run without jenkins
+most likely pytest is not installed for root
+
+try sudo pip3 install selenium pytest

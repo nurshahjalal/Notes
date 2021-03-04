@@ -1,0 +1,79 @@
+Solutions:
+===============================
+
+
+6.
+name_rank = {name: rank for name, rank in ranks}
+
+7.
+keys_sqr_values = {key: key * key for key in range(10)}
+
+8.
+n=9
+print(randint(10**(n-1), (10**n) -1)
+
+****************
+9.
+****************
+
+fib = []
+for i in range(0, 10):
+    if i == 0:
+        fib.append(i)
+    elif i == 1:
+        fib.append(i)
+    elif i == 2:
+        fib.append(i-1)
+    else:
+        num = int(fib[-1]) + int(fib[-2])
+        fib.append(num)
+
+print(fib)
+
+terms = 10
+# first two terms
+num1, num2 = 0, 1
+count = 0
+
+print("Fibonacci sequence:")
+while count < terms:
+    print(num1, end="  ")
+    temp = num1 + num2
+    # update values
+    num1 = num2
+    num2 = temp
+    count += 1
+
+s = ["l", "0", "A"]
+print()
+
+# another way
+a, b = 0, 1
+
+while a < 1000:
+    print(a, end= " ")
+    a, b = b, a+b
+
+
+
+10.
+def reverse_string(strs):
+    return strs[::-1]
+	
+11.
+target_num = 22
+given_list = [14, 20, 5, 9, 6, 7, 3, 33, 18, 4]
+found = False
+for p in given_list:
+    if p < target_num:
+        temp = target_num - int(p)
+        if temp in given_list:
+            print(F"Target Number {target_num} = {p} and {temp}")
+            found = True
+            break
+
+if not found:
+    print("Pair Not Found")
+
+12.
+os.listdir("subdir')

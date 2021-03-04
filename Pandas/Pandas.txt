@@ -1,0 +1,538 @@
+
+Jupyter Notebook shortcut:
+
+1. View Line Numbers : View >> Toggle Line Numbers ( shift + L)
+
+2. To Resart >> use kernel
+
+
+Panda Tutorial:
+
+import pandas as pd
+
+# createa a series
+
+about_me = ["Handsome", "Brilliant", "Smart", "Charming"]
+
+# Csv read
+csv = pd.read_csv("C:\\Users\\nursh\\.ipynb_checkpoints\\pokemon.csv")
+
+# using squeeze
+# convert dataframe to series
+csv = pd.read_csv("C:\\Users\\nursh\\.ipynb_checkpoints\\pokemon.csv", squeeze=True)
+
+# selecting column
+csv = pd.read_csv("C:\\Users\\nursh\\.ipynb_checkpoints\\pokemon.csv", usecols=["Name"], squeeze=True)
+
+# find len
+len(csv)
+
+# convert to dictionary
+dict(csv)
+
+# index
+csv.index
+
+# tuple
+csv.shape
+
+# make list
+list(csv)
+
+max(csv)
+
+csv.size
+
+# find dimension
+csv.ndim
+
+#########################################
+>>> sorting <<<< inplace >>> sort_index
+#########################################
+
+import pandas as pd
+pokemon = pd.read_csv("C:\\Users\\nursh\\.ipynb_checkpoints\\pokemon.csv",usecols=["Name"], squeeze=True)
+
+
+# sorting values alphabetically
+pokemon.sort_values()
+
+# sorting values discending
+pokemon.sort_values(ascending=False).head(5)
+
+# To make permanent the sorting
+# use inplace parameter
+pokemon.sort_values(ascending=True, inplace=True)
+
+# to revert back to original shape
+# use sorting_index
+# to make it permanent use inplace
+pokemon.sort_index(ascending=True, inplace=True)
+
+
+#########################################
+in Keyword
+#########################################
+
+
+# Checking Existence of a value
+pokemon.head(3)
+
+0    Bulbasaur
+1      Ivysaur
+2     Venusaur
+Name: Name, dtype: object
+
+# it will return False as it is checking the existence of index not the vale
+"Bulbasaur" in pokemon
+False
+
+# it will return True as it Finds 0 index
+0 in pokemon
+True
+
+# Check the value existence
+"Bulbasaur" in pokemon.values
+True
+
+#########################################
+Extracting values
+#########################################
+
+# Extracting Value same as python list
+pokemon[50]
+
+# get the last 50
+pokemon[-50:]
+
+# get last 50 t0 30
+pokemon[-50 : -30]
+
+# get multiple indexes
+pokemon[[100, 301, 600]]
+
+
+#########################################
+Index label
+#########################################
+
+import pandas as pd
+# insted of automatic number index , Name column can be used as index label
+pokemon = pd.read_csv("C:\\Users\\nursh\\.ipynb_checkpoints\\pokemon.csv",usecols=["Name", "Type 1"], squeeze=True,
+                      index_col="Name")
+                      
+                      
+Name
+Bulbasaur                  Grass
+Ivysaur                    Grass
+Venusaur                   Grass
+VenusaurMega Venusaur      Grass
+Charmander                  Fire
+                          ...   
+Diancie                     Rock
+DiancieMega Diancie         Rock
+HoopaHoopa Confined      Psychic
+HoopaHoopa Unbound       Psychic
+Volcanion                   Fire
+Name: Type 1, Length: 800, dtype: object
+
+# extract value by index label
+pokemon["Bulbasaur"]
+
+pokemon["Bulbasaur":"Weedle"]
+
+pokemon[:"Weedle"]
+
+pokemon[["Oddish","Zubat", "Nidorino", "Pidgeot"]]
+
+# if no value found, error will raise
+pokemon["Digimon"]
+
+# if any of value not found error will raise
+# in this case "Oddish" is available but "Digimon" not available
+pokemon[["Oddish","Digimon"]]
+
+>>> Reindexing label <<<<
+
+# To overcome the error use reindex, if no value found returns NaN
+pokemon.reindex(index = ["Oddish","Digimon"])
+
+Name
+Oddish     Grass
+Digimon      NaN
+Name: Type 1, dtype: object
+
+>>>> get <<<<<<
+# get method 
+pokemon.get(1)
+
+# using get will return null if no value found
+pokemon.get("Digimon")
+
+# using get will return custom value if no value found
+pokemon.get("Digimon", "No Vlaue Found")
+
+>>>> MAth Methods <<<
+
+import pandas as pd
+google = pd.read_csv("google_stock_price.csv",usecols=["Open"], squeeze=True)
+
+# Count returns number of valid valus , no null or missing values
+google.count()
+
+# sum 
+google.sum()
+
+# average
+google.mean()
+
+# min and max
+google.min()
+google.max()
+
+# middle number
+google.median()
+
+# value that occurs most freauently
+google.mode()
+
+# describe
+google.describe()
+
+count    1258.000000
+mean      533.709833
+std       151.904442
+min       279.120000
+25%       404.115000
+50%       537.470000
+75%       654.922500
+max       816.680000
+Name: Open, dtype: float64
+
+
+>>>> idmax and idmin <<<<<
+
+# min index
+google.idxmin()
+
+# max index
+google.idxmax()
+
+
+>>>>>>>>>>>>   Value Counts <<<<<<<<<<<<<<<
+###########################################################
+
+# counting all value appearns number of times
+pokemon.value_counts()
+Water       112
+Normal       98
+Grass        70
+Bug          69
+Psychic      57
+Fire         52
+Rock         44
+Electric     44
+Ground       32
+Ghost        32
+Dragon       32
+Dark         31
+Poison       28
+Fighting     27
+Steel        27
+Ice          24
+Fairy        17
+Flying        4
+Name: Type 1, dtype: int64
+
+
+# Since it is series some methods are available
+pokemon.value_counts().sum()
+
+# same as 
+pokemon.count()
+
+pokemon.value_counts(ascending=True)
+Flying        4
+Fairy        17
+Ice          24
+Steel        27
+Fighting     27
+Poison       28
+Dark         31
+Dragon       32
+Ghost        32
+Ground       32
+Electric     44
+Rock         44
+Fire         52
+Psychic      57
+Bug          69
+Grass        70
+Normal       98
+Water       112
+Name: Type 1, dtype: int64
+
+
+>>>> Apply Method <<<
+
+Apply method is used for customisable function.
+
+# Apply method
+def classify_performance(number):
+    if number < 300:
+        return "Poor"
+    elif number >= 300 and number <= 550:
+        return "Good"
+    else:
+        return "Excellent"
+        
+# apply the classify_performance method to each row
+google.apply(classify_performance).head(6)
+0    Good
+1    Good
+2    Good
+3    Good
+4    Good
+5    Good
+Name: Open, dtype: object
+
+# with lambda 
+google.apply(lambda price: price + 1)
+
+0       326.25
+1       332.27
+2       330.83
+3       329.34
+4       323.04
+         ...  
+1253    791.90
+1254    791.68
+1255    794.70
+1256    784.33
+1257    783.75
+Name: Open, Length: 1258, dtype: float64
+
+
+
+
+
+#####################################################################################################
+
+            # Data Frame #
+            
+#####################################################################################################
+
+nba = pd.read_csv("nba.csv")
+
+# Select one column from dataframe
+nba["Name"]
+
+# Select multiple columns from dataframe
+nba[["Name", "Team"]]
+
+# To Add new column, new column should assign value, it will add new column at the end
+# if the new column name exists it will override the existing value
+nba["Sport"] = "Basketball"
+
+# to add new column in custom postion, use insert
+nba.insert(loc=4, column="Owner", value="None")
+
+
+# Broadcasting >> applying single method to all data
+# convert salary to millions
+nba["Salary (m)"] = nba["Salary"]/1000000
+
+
+##################################
+ Dealing with Null Values
+##################################
+
+# dropna -- remove any rows that has one or more null values
+nba.dropna()
+
+# how parameter=all means it will remove rows that has all null values
+nba.dropna(how="all")
+
+# to make it permanent use inplace
+nba.dropna(how="all", inplace=True)
+
+####################
+Removing Coloumn
+#######################
+
+# Remove columns that has any null value in any rows
+nba.dropna(axis=1)
+
+
+# Remove null value from specific rows
+# if salary has any rows with null value, it will be removed
+nba.dropna(subset=["Salary"])
+
+# Remove null value from multiple rows
+# if salary has any rows with null value, it will be removed
+nba.dropna(subset=["Salary", "College"])
+
+####################################################
+fillna
+####################################################
+
+# Replace all Null value with 0
+nba.fillna(0)
+
+# Replace Null value in specific column with 0
+# To make it permanent use inspace=True
+nba["Salary"].fillna(0)
+
+# Replacing null value with "No College" in college column
+nba["College"].fillna("No College")
+
+
+############################################################
+
+Convert Data Type >> astype <<<
+
+############################################################
+
+# Before converting all null value needs to be replaced
+# Convert salary column data type float to int
+# As astype has no inplace args new assignment is needed to effect the change
+nba["Salary"] = nba["Salary"].astype("int").head(3)
+
+	Name	        Team	        Number	    Position	    Age	    Height	    Weight	    College	                    Salary
+0	Avery Bradley	Boston Celtics	0.0	        PG	            25.0	6-2	        180.0	    Texas	                    7730337
+1	Jae Crowder	    Boston Celtics	99.0	    SF	            25.0	6-6	        235.0	    Marquette	                6796117
+2	John Holland	Boston Celtics	30.0	    SG	            27.0	6-5	        205.0	    Boston University	        0
+1
+​
+     
+################################################################################
+>>>>> category datatype , explicit to pandas not available in python <<<<<<<<<
+################################################################################
+
+a category is unique data type that exists in pandas and is very ideal for small number of unique values in a data set.
+suppose a data set with million rows of gender column which has only "male" and "Female" value, category comes handy
+
+like in nba data set there are only 5 positions so we can define the whole column as category data type
+
+nba["Position"].value_counts()
+
+SG    102
+PF    100
+PG     92
+SF     85
+C      78
+Name: Position, dtype: int64
+
+# find how many unique values 
+nba["Position"].nunique()
+5
+
+nba["Position"] = nba["Position"].astype("category")
+
+
+################################################################################
+>>>>> Sort Values  Sort Index<<<<<<<<<
+################################################################################
+
+nba.sort_values(
+    by,
+    axis=0,
+    ascending=True,
+    inplace=False,
+    kind='quicksort',
+    na_position='last',
+    ignore_index=False,
+    key: Union[Callable[[ForwardRef('Series')], Union[ForwardRef('Series'), ~AnyArrayLike]], NoneType] = None,
+) 
+
+# Sort values 
+# "by" args refers to column name
+nba.sort_values(by="Name")
+
+# by default null value goes at last after sorting
+# but null value can chnage their position by using -na_positon arg
+nba.sort_values("Name", na_position="first")
+
+# to make the sorting permanent use inplace
+nba.sort_values("Salary", ascending=False)
+
+# mix and match -- null value first then sorting with salary in discending order
+nba.sort_values("Salary", ascending=False, na_position="first")
+
+
+# Sorting with multiple column values
+# it will first sort "Team" and within Team it will sort Name
+nba.sort_values(["Team", "Name"])
+
+# Sorting with multiple column values with ascending
+nba.sort_values(["Team", "Name"], ascending=False )
+
+# Sorting with multiple column values with ascending
+nba.sort_values(["Team", "Name"], ascending=[False, True] )
+
+# Sort index - helps to shape the data in original format
+# after multiple sorting if user wants to get back original data, sort_index is helpful
+# altered data type stays the same
+nba.sort_index()
+
+################################################################################
+>>>>> Rank <<<<<<<<<
+################################################################################
+
+import pandas as pd
+nba = pd.read_csv("nba.csv").dropna(how="all")
+nba["Salary"] =nba["Salary"].fillna(0).astype("int")
+nba["Salary_Rank"] = nba["Salary"].rank(ascending=False).astype("int")
+
+# To check rank function working properly
+nba.sort_values(by="Salary", ascending=False)
+
+
+
+################################################################################
+>>>>> Fltering Data <<<<<<<<<
+################################################################################
+
+nunique = number of unique - does not count null value
+unique
+and
+or
+between
+set_index
+reset_index
+loc
+iloc - iindex locator
+Rename
+Delete Rows
+Delete Columns
+nlargest
+nsmallest
+where
+
+#############
+multiindex
+#############
+
+
+#############
+Group By
+#############
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

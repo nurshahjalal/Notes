@@ -1,0 +1,63 @@
+Problems:
+
+
+1.Given a Python list, remove all occurrence of 20 from the list
+	list1 = [5, 20, 15, 20, 25, 50, 20]
+	
+2. Concatenate two lists index-wise
+	list1 = ["M", "na", "i", "Ke"]
+	list2 = ["y", "me", "s", "lly"]
+	
+3. Duplicate:
+	names  ['abul', 'babul', 'kabul', 'chulbul', 'Abul', 'Babul', 'Nupur', 'nupur', 'kabul', 'abul', 'babul',
+         'kabul', 'abul', 'Babul', 'Nupur', 'nupur', 'kabul', 'Kabita', "Alex"]
+	
+	a): print only unique names
+	b): print most common names
+	c): find only duplicate names from the list
+	
+
+4.	Given a two Python list. Iterate both lists simultaneously such that list1 should display item in original order 
+	and list2 in reverse order
+
+
+	list1 = [10, 20, 30, 40]
+	list2 = [100, 200, 300, 400]
+	list3 = [1000, 2000, 3000, 4000]
+
+	answer should be [(10, 400, 1000), (20, 300, 2000), (30, 200, 3000), (40, 100, 4000)]
+	
+5. find prime numbers
+
+	random_list = [1, 4, 9, 11, 13, 43, 87, 99, 179, 201, 203, 103, 67, 66, 90, 88]
+
+	# prime number should be greater than 1
+	# prime numbers are divisible only by itself
+	
+	
+6. Dictionary Comphrehension
+
+	convert to dictionary:
+	ranks = [('Pickard', 'Captain'), ('Riker', 'Commander'), ('Morf', 'Lieutenant')]
+	result: {'Pickard': 'Captain', 'Riker': 'Commander', 'Morf': 'Lieutenant'}
+
+7. Create a dictionary range from 0 to 10 with values being squared of keys
+	results: {0: 0, 1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36, 7: 49, 8: 64, 9: 81}
+	
+8. Random number
+	Create an nth digit random number, ie 9th digit random number
+	
+9. Fibonacci
+	Create a all fibonacci number up to 100
+	
+10. Write a function that reverse a string
+
+11. Given a target number, find the pairs that adds to target number
+	suppose, if the target number is 3, pair number would be 1 , 2
+	
+12. OS Module
+	How to print all files from a subdirectory
+	suppose : Dir > SubDir > test.txt
+	outcome: test.txt
+	
+
